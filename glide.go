@@ -5,7 +5,7 @@
 //
 // A glide.yaml file looks like:
 //
-//		package: github.com/Masterminds/glide
+//		package: github.com/sunchunming/glide
 //		imports:
 //		- package: github.com/Masterminds/cookoo
 //		- package: github.com/kylelemons/go-gypsy
@@ -21,14 +21,15 @@ package main
 import (
 	"path/filepath"
 
-	"github.com/Masterminds/glide/action"
-	"github.com/Masterminds/glide/cache"
-	"github.com/Masterminds/glide/msg"
-	gpath "github.com/Masterminds/glide/path"
-	"github.com/Masterminds/glide/repo"
-	"github.com/Masterminds/glide/util"
+	"github.com/sunchunming/glide/action"
+	"github.com/sunchunming/glide/cache"
+	"github.com/sunchunming/glide/msg"
+	gpath "github.com/sunchunming/glide/path"
+	"github.com/sunchunming/glide/repo"
+	"github.com/sunchunming/glide/util"
 
 	"github.com/codegangsta/cli"
+	v "github.com/Masterminds/vcs"
 
 	"fmt"
 	"os"
@@ -41,7 +42,7 @@ const usage = `Vendor Package Management for your Go projects.
    Each project should have a 'glide.yaml' file in the project directory. Files
    look something like this:
 
-       package: github.com/Masterminds/glide
+       package: github.com/sunchunming/glide
        imports:
        - package: github.com/Masterminds/cookoo
          version: 1.1.0
@@ -90,6 +91,16 @@ func main() {
 		cli.BoolFlag{
 			Name:  "no-color",
 			Usage: "Turn off colored output for log messages",
+		},
+		cli.StringFlag{
+			Name:	"proxy_domain_file",
+			Value:	v.DefaultDomainPath,
+			Usage: 	"Http proxy domain setting file path",
+		},
+		cli.StringFlag{
+			Name: "http_proxy_server",
+			Value: v.DefaultProxyServer,
+			Usage: "Http proxy setting",
 		},
 	}
 	app.CommandNotFound = func(c *cli.Context, command string) {
@@ -832,6 +843,7 @@ func startup(c *cli.Context) error {
 	action.Quiet(c.Bool("quiet"))
 	action.Init(c.String("yaml"), c.String("home"))
 	action.EnsureGoVendor()
+	v.Init(c.String("proxy_domain_file"), c.String("http_proxy_server"))
 	gpath.Tmp = c.String("tmp")
 	return nil
 }

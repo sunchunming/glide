@@ -16,7 +16,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Masterminds/glide/msg"
+	"github.com/sunchunming/glide/msg"
 )
 
 var godepMark = map[string]bool{}

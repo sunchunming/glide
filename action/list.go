@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/Masterminds/glide/dependency"
-	"github.com/Masterminds/glide/msg"
+	"github.com/sunchunming/glide/dependency"
+	"github.com/sunchunming/glide/msg"
 )
 
 // List lists all of the dependencies of the current project.

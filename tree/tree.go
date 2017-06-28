@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/sunchunming/glide/dependency"
-	"github.com/Masterminds/glide/msg"
-	gpath "github.com/Masterminds/glide/path"
-	"github.com/Masterminds/glide/util"
+	"github.com/sunchunming/glide/msg"
+	gpath "github.com/sunchunming/glide/path"
+	"github.com/sunchunming/glide/util"
 )
 
 // Display displays a tree view of the given project.

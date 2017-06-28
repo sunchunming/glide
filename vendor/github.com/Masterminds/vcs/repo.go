@@ -216,7 +216,11 @@ func (b *base) setLocalPath(local string) {
 }
 
 func (b base) run(cmd string, args ...string) ([]byte, error) {
-	out, err := exec.Command(cmd, args...).CombinedOutput()
+	c := exec.Command(cmd, args...)
+	if UseProxy(b.remote){
+		c.Env = mergeEnvLists(ProxyEnv(), os.Environ())
+	}
+	out, err := c.CombinedOutput()
 	b.log(out)
 	if err != nil {
 		err = fmt.Errorf("%s: %s", out, err)
@@ -233,10 +237,20 @@ func (b *base) CmdFromDir(cmd string, args ...string) *exec.Cmd {
 
 func (b *base) RunFromDir(cmd string, args ...string) ([]byte, error) {
 	c := b.CmdFromDir(cmd, args...)
+	if UseProxy(b.remote){
+		c.Env = mergeEnvLists(ProxyEnv(), c.Env)
+	}
 	out, err := c.CombinedOutput()
 	return out, err
 }
-
+/*
+func (b *base) RunFromDirWithHttpProxy(cmd string, args ...string) ([]byte, error) {
+	c := b.CmdFromDir(cmd, args...)
+	c.Env = mergeEnvLists(ProxyEnv(), c.Env)
+	out, err := c.CombinedOutput()
+	return out, err
+}
+*/
 func (b *base) referenceList(c, r string) []string {
 	var out []string
 	re := regexp.MustCompile(r)

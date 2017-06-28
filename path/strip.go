@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Masterminds/glide/godep/strip"
-	"github.com/Masterminds/glide/msg"
+	"github.com/sunchunming/glide/godep/strip"
+	"github.com/sunchunming/glide/msg"
 )
 
 // StripVendor removes nested vendor and Godeps/_workspace/ directories.

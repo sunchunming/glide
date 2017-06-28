@@ -10,6 +10,7 @@ import (
 	"runtime"
 	"strings"
 	"time"
+	"fmt"
 )
 
 // NewGitRepo creates a new instance of GitRepo. The remote and local directories
@@ -71,8 +72,8 @@ func (s GitRepo) Vcs() Type {
 
 // Get is used to perform an initial clone of a repository.
 func (s *GitRepo) Get() error {
+	fmt.Println("git repo:", s.Remote())
 	out, err := s.run("git", "clone", "--recursive", s.Remote(), s.LocalPath())
-
 	// There are some windows cases where Git cannot create the parent directory,
 	// if it does not already exist, to the location it's trying to create the
 	// repo. Catch that error and try to handle it.

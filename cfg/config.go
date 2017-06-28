@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/Masterminds/glide/mirrors"
-	"github.com/Masterminds/glide/util"
+	"github.com/sunchunming/glide/mirrors"
+	"github.com/sunchunming/glide/util"
 	"github.com/Masterminds/vcs"
 	"gopkg.in/yaml.v2"
 )

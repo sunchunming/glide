@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
+//	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
@@ -104,7 +104,7 @@ func detectVcsFromRemote(vcsURL string) (Type, string, error) {
 		u.RawQuery = u.RawQuery + "+go-get=1"
 	}
 	checkURL := u.String()
-	resp, err := http.Get(checkURL)
+	resp, err := httpGetWithProxy(checkURL)
 	if err != nil {
 		return NoVCS, "", ErrCannotDetectVCS
 	}
@@ -272,7 +272,7 @@ func checkURL(i map[string]string, u *url.URL) (Type, error) {
 }
 
 func get(url string) ([]byte, error) {
-	resp, err := http.Get(url)
+	resp, err := httpGetWithProxy(url)
 	if err != nil {
 		return nil, err
 	}
