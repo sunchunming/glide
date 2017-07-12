@@ -232,6 +232,15 @@ var vcsList = []*vcsInfo{
 		host:    "go.googlesource.com",
 		pattern: `^(?P<rootpkg>go\.googlesource\.com/[A-Za-z0-9_.\-]+/?)$`,
 	},
+	// JD.COM workarounds
+	{
+		host:    "jd.com",
+		pattern: `^(?P<rootpkg>jd\.com/[A-Za-z0-9_.\-]+/[A-Za-z0-9_.\-]+)(/[A-Za-z0-9_.\-]+)*$`,
+	},
+	{
+		host:    "git.jd.com",
+		pattern: `^(?P<rootpkg>git\.jd\.com/[A-Za-z0-9_.\-]+/[A-Za-z0-9_.\-]+)(/[A-Za-z0-9_.\-]+)*$`,
+	},
 	// TODO: Once Google Code becomes fully deprecated this can be removed.
 	{
 		host:    "code.google.com",
